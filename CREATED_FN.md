@@ -1,4 +1,4 @@
-## 各类hook生成的方法
+## 各类Hook生成的方法
 
 ## 同步的Hook
 
@@ -21,13 +21,13 @@ syncHook.call(0)
 
 ```js
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	var _fn0 = _x[0];
-	_fn0(value);
-	var _fn1 = _x[1];
-	_fn1(value);
+    "use strict";
+    var _context;
+    var _x = this._x;
+    var _fn0 = _x[0];
+    _fn0(value);
+    var _fn1 = _x[1];
+    _fn1(value);
 }
 ```
 
@@ -361,12 +361,12 @@ asyncParallelBailHook.tapAsync('AsyncParallelBailHookPlugin', (value, callback) 
             }
         }, 1000);
     }).then(
-		(res) => callback(null, res),
-		(err) => callback(err)
-	);
+        (res) => callback(null, res),
+        (err) => callback(err)
+    );
 })
 asyncParallelBailHook.tapAsync('AsyncParallelBailHookPlugin', (value, callback) => {
-	console.log(`我是2号Tap第${value}个`);
+    console.log(`我是2号Tap第${value}个`);
 })
 asyncParallelBailHook.callAsync(0, (err, result) => {
     console.log('结束');
@@ -384,77 +384,77 @@ asyncParallelBailHook.callAsync(0, (err, result) => {
  * 如果callback传递的err为null，res没有值，后面的callback逻辑继续执行，最后执行_callback,没有参数
  */
 function anonymous(value, _callback) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	var _results = new Array(2);
-	var _checkDone = function () {
-		for (var i = 0; i < _results.length; i++) {
-			var item = _results[i];
-			if (item === undefined) return false;
-			if (item.result !== undefined) {
-				_callback(null, item.result);
-				return true;
-			}
-			if (item.error) {
-				_callback(item.error);
-				return true;
-			}
-		}
-		return false;
-	}
-	do {
-		var _counter = 2;
-		var _done = (function () {
-			_callback();
-		});
-		if (_counter <= 0) break;
-		var _fn0 = _x[0];
-		_fn0(value, (function (_err0, _result0) {
-			if (_err0) {
-				if (_counter > 0) {
-					if (0 < _results.length && ((_results.length = 1), (_results[0] = { error: _err0 }), _checkDone())) {
-						_counter = 0;
-					} else {
-						if (--_counter === 0) _done();
-					}
-				}
-			} else {
-				if (_counter > 0) {
-					if (0 < _results.length && (_result0 !== undefined && (_results.length = 1), (_results[0] = { result: _result0 }), _checkDone())) {
-						_counter = 0;
-					} else {
-						if (--_counter === 0) _done();
-					}
-				}
-			}
-		}));
-		if (_counter <= 0) break;
-		if (1 >= _results.length) {
-			if (--_counter === 0) _done();
-		} else {
-			var _fn1 = _x[1];
-			_fn1(value, (function (_err1, _result1) {
-				if (_err1) {
-					if (_counter > 0) {
-						if (1 < _results.length && ((_results.length = 2), (_results[1] = { error: _err1 }), _checkDone())) {
-							_counter = 0;
-						} else {
-							if (--_counter === 0) _done();
-						}
-					}
-				} else {
-					if (_counter > 0) {
-						if (1 < _results.length && (_result1 !== undefined && (_results.length = 2), (_results[1] = { result: _result1 }), _checkDone())) {
-							_counter = 0;
-						} else {
-							if (--_counter === 0) _done();
-						}
-					}
-				}
-			}));
-		}
-	} while (false);
+    "use strict";
+    var _context;
+    var _x = this._x;
+    var _results = new Array(2);
+    var _checkDone = function () {
+        for (var i = 0; i < _results.length; i++) {
+            var item = _results[i];
+            if (item === undefined) return false;
+            if (item.result !== undefined) {
+                _callback(null, item.result);
+                return true;
+            }
+            if (item.error) {
+                _callback(item.error);
+                return true;
+            }
+        }
+        return false;
+    }
+    do {
+        var _counter = 2;
+        var _done = (function () {
+            _callback();
+        });
+        if (_counter <= 0) break;
+        var _fn0 = _x[0];
+        _fn0(value, (function (_err0, _result0) {
+            if (_err0) {
+                if (_counter > 0) {
+                    if (0 < _results.length && ((_results.length = 1), (_results[0] = { error: _err0 }), _checkDone())) {
+                        _counter = 0;
+                    } else {
+                        if (--_counter === 0) _done();
+                    }
+                }
+            } else {
+                if (_counter > 0) {
+                    if (0 < _results.length && (_result0 !== undefined && (_results.length = 1), (_results[0] = { result: _result0 }), _checkDone())) {
+                        _counter = 0;
+                    } else {
+                        if (--_counter === 0) _done();
+                    }
+                }
+            }
+        }));
+        if (_counter <= 0) break;
+        if (1 >= _results.length) {
+            if (--_counter === 0) _done();
+        } else {
+            var _fn1 = _x[1];
+            _fn1(value, (function (_err1, _result1) {
+                if (_err1) {
+                    if (_counter > 0) {
+                        if (1 < _results.length && ((_results.length = 2), (_results[1] = { error: _err1 }), _checkDone())) {
+                            _counter = 0;
+                        } else {
+                            if (--_counter === 0) _done();
+                        }
+                    }
+                } else {
+                    if (_counter > 0) {
+                        if (1 < _results.length && (_result1 !== undefined && (_results.length = 2), (_results[1] = { result: _result1 }), _checkDone())) {
+                            _counter = 0;
+                        } else {
+                            if (--_counter === 0) _done();
+                        }
+                    }
+                }
+            }));
+        }
+    } while (false);
 }
 ```
 
@@ -473,7 +473,7 @@ asyncParallelBailHook.tapPromise('AsyncParallelBailHookPlugin', (value) => {
                 j('小于5失败了')
             }
         }, 1000);
-		
+
     });
 })
 asyncParallelBailHook.tapPromise('AsyncParallelBailHookPlugin', (value) => {
@@ -489,7 +489,7 @@ asyncParallelBailHook.tapPromise('AsyncParallelBailHookPlugin', (value) => {
     });
 })
 asyncParallelBailHook.promise(0).then((res) => {
-	console.log('res', res);
+    console.log('res', res);
 }).catch((err) => {
     console.log('err', err);
 })
@@ -504,95 +504,95 @@ asyncParallelBailHook.promise(0).then((res) => {
  * 钩子中的promise.reject, 会将_counter = 0; 后面钩子的promise.then不会执行，并在asyncParallelBailHook.promise.catch中获得参数
  */
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	return new Promise((function (_resolve, _reject) {
-		var _sync = true;
-		function _error(_err) {
-			if (_sync)
-				_resolve(Promise.resolve().then((function () { throw _err; })));
-			else
-				_reject(_err);
-		};
-		var _results = new Array(2);
-		var _checkDone = function () {
-			for (var i = 0; i < _results.length; i++) {
-				var item = _results[i];
-				if (item === undefined) return false;
-				if (item.result !== undefined) {
-					_resolve(item.result);
-					return true;
-				}
-				if (item.error) {
-					_error(item.error);
-					return true;
-				}
-			}
-			return false;
-		}
-		do {
-			var _counter = 2;
-			var _done = (function () {
-				_resolve();
-			});
-			if (_counter <= 0) break;
-			var _fn0 = _x[0];
-			var _hasResult0 = false;
-			var _promise0 = _fn0(value);
-			if (!_promise0 || !_promise0.then)
-				throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
-			_promise0.then((function (_result0) {
-				_hasResult0 = true;
-				if (_counter > 0) {
-					if (0 < _results.length && (_result0 !== undefined && (_results.length = 1), (_results[0] = { result: _result0 }), _checkDone())) {
-						_counter = 0;
-					} else {
-						if (--_counter === 0) _done();
-					}
-				}
-			}), function (_err0) {
-				if (_hasResult0) throw _err0;
-				if (_counter > 0) {
-					if (0 < _results.length && ((_results.length = 1), (_results[0] = { error: _err0 }), _checkDone())) {
-						_counter = 0;
-					} else {
-						if (--_counter === 0) _done();
-					}
-				}
-			});
-			if (_counter <= 0) break;
-			if (1 >= _results.length) {
-				if (--_counter === 0) _done();
-			} else {
-				var _fn1 = _x[1];
-				var _hasResult1 = false;
-				var _promise1 = _fn1(value);
-				if (!_promise1 || !_promise1.then)
-					throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-				_promise1.then((function (_result1) {
-					_hasResult1 = true;
-					if (_counter > 0) {
-						if (1 < _results.length && (_result1 !== undefined && (_results.length = 2), (_results[1] = { result: _result1 }), _checkDone())) {
-							_counter = 0;
-						} else {
-							if (--_counter === 0) _done();
-						}
-					}
-				}), function (_err1) {
-					if (_hasResult1) throw _err1;
-					if (_counter > 0) {
-						if (1 < _results.length && ((_results.length = 2), (_results[1] = { error: _err1 }), _checkDone())) {
-							_counter = 0;
-						} else {
-							if (--_counter === 0) _done();
-						}
-					}
-				});
-			}
-		} while (false);
-		_sync = false;
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    return new Promise((function (_resolve, _reject) {
+        var _sync = true;
+        function _error(_err) {
+            if (_sync)
+                _resolve(Promise.resolve().then((function () { throw _err; })));
+            else
+                _reject(_err);
+        };
+        var _results = new Array(2);
+        var _checkDone = function () {
+            for (var i = 0; i < _results.length; i++) {
+                var item = _results[i];
+                if (item === undefined) return false;
+                if (item.result !== undefined) {
+                    _resolve(item.result);
+                    return true;
+                }
+                if (item.error) {
+                    _error(item.error);
+                    return true;
+                }
+            }
+            return false;
+        }
+        do {
+            var _counter = 2;
+            var _done = (function () {
+                _resolve();
+            });
+            if (_counter <= 0) break;
+            var _fn0 = _x[0];
+            var _hasResult0 = false;
+            var _promise0 = _fn0(value);
+            if (!_promise0 || !_promise0.then)
+                throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+            _promise0.then((function (_result0) {
+                _hasResult0 = true;
+                if (_counter > 0) {
+                    if (0 < _results.length && (_result0 !== undefined && (_results.length = 1), (_results[0] = { result: _result0 }), _checkDone())) {
+                        _counter = 0;
+                    } else {
+                        if (--_counter === 0) _done();
+                    }
+                }
+            }), function (_err0) {
+                if (_hasResult0) throw _err0;
+                if (_counter > 0) {
+                    if (0 < _results.length && ((_results.length = 1), (_results[0] = { error: _err0 }), _checkDone())) {
+                        _counter = 0;
+                    } else {
+                        if (--_counter === 0) _done();
+                    }
+                }
+            });
+            if (_counter <= 0) break;
+            if (1 >= _results.length) {
+                if (--_counter === 0) _done();
+            } else {
+                var _fn1 = _x[1];
+                var _hasResult1 = false;
+                var _promise1 = _fn1(value);
+                if (!_promise1 || !_promise1.then)
+                    throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+                _promise1.then((function (_result1) {
+                    _hasResult1 = true;
+                    if (_counter > 0) {
+                        if (1 < _results.length && (_result1 !== undefined && (_results.length = 2), (_results[1] = { result: _result1 }), _checkDone())) {
+                            _counter = 0;
+                        } else {
+                            if (--_counter === 0) _done();
+                        }
+                    }
+                }), function (_err1) {
+                    if (_hasResult1) throw _err1;
+                    if (_counter > 0) {
+                        if (1 < _results.length && ((_results.length = 2), (_results[1] = { error: _err1 }), _checkDone())) {
+                            _counter = 0;
+                        } else {
+                            if (--_counter === 0) _done();
+                        }
+                    }
+                });
+            }
+        } while (false);
+        _sync = false;
+    }));
 }
 ```
 
@@ -603,15 +603,15 @@ function anonymous(value) {
 ```js
 const asyncSeriesHook = new AsyncSeriesHook(['value']);
 asyncSeriesHook.tapAsync('AsyncSeriesHookPlugin', (value, callback) => {
-	console.log(value);
-	callback('我是第1个error')
+    console.log(value);
+    callback('我是第1个error')
 });
 asyncSeriesHook.tapAsync('AsyncSeriesHookPlugin', (value, callback) => {
-	console.log(value);
-	callback()
+    console.log(value);
+    callback()
 });
 asyncSeriesHook.callAsync(0, (error) => {
-	console.log('error', error);
+    console.log('error', error);
 })
 ```
 
@@ -623,27 +623,27 @@ asyncSeriesHook.callAsync(0, (error) => {
  * 如果callback传递参数，则下一个钩子不会执行，参数会被_callback接收
  */
 function anonymous(value, _callback) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	function _next0() {
-		var _fn1 = _x[1];
-		_fn1(value, (function (_err1) {
-			if (_err1) {
-				_callback(_err1);
-			} else {
-				_callback();
-			}
-		}));
-	}
-	var _fn0 = _x[0];
-	_fn0(value, (function (_err0) {
-		if (_err0) {
-			_callback(_err0);
-		} else {
-			_next0();
-		}
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    function _next0() {
+        var _fn1 = _x[1];
+        _fn1(value, (function (_err1) {
+            if (_err1) {
+                _callback(_err1);
+            } else {
+                _callback();
+            }
+        }));
+    }
+    var _fn0 = _x[0];
+    _fn0(value, (function (_err0) {
+        if (_err0) {
+            _callback(_err0);
+        } else {
+            _next0();
+        }
+    }));
 }
 ```
 
@@ -652,7 +652,7 @@ function anonymous(value, _callback) {
 ```js
 const asyncSeriesHook = new AsyncSeriesHook(['value']);
 asyncSeriesHook.tapPromise('AsyncSeriesHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) > 5) {
                 console.log(`我是1号Tap`);
@@ -661,11 +661,11 @@ asyncSeriesHook.tapPromise('AsyncSeriesHookPlugin', (value) => {
                 j('小于5失败了')
             }
         }, 1000);
-		
+
     });
 });
 asyncSeriesHook.tapPromise('AsyncSeriesHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) <= 5) {
                 console.log(`我是2号Tap`);
@@ -677,14 +677,12 @@ asyncSeriesHook.tapPromise('AsyncSeriesHookPlugin', (value) => {
     });
 });
 asyncSeriesHook.promise(0).then(() => {
-	// 无参数
-	console.log('结束');
+    // 无参数
+    console.log('结束');
 }).catch((err) => {
-	console.log('错误', err);
+    console.log('错误', err);
 })
 ```
-
-
 
 #### `promise`代码逻辑
 
@@ -695,45 +693,45 @@ asyncSeriesHook.promise(0).then(() => {
  * promise.reject, 后面钩子会被中断，错误在asyncSeriesHook.promise().catch中捕获
  */
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	return new Promise((function (_resolve, _reject) {
-		var _sync = true;
-		function _error(_err) {
-			if (_sync)
-				_resolve(Promise.resolve().then((function () { throw _err; })));
-			else
-				_reject(_err);
-		};
-		function _next0() {
-			var _fn1 = _x[1];
-			var _hasResult1 = false;
-			var _promise1 = _fn1(value);
-			if (!_promise1 || !_promise1.then)
-				throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-			_promise1.then((function (_result1) {
-				_hasResult1 = true;
-				_resolve();
-			}), function (_err1) {
-				if (_hasResult1) throw _err1;
-				_error(_err1);
-			});
-		}
-		var _fn0 = _x[0];
-		var _hasResult0 = false;
-		var _promise0 = _fn0(value);
-		if (!_promise0 || !_promise0.then)
-			throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
-		_promise0.then((function (_result0) {
-			_hasResult0 = true;
-			_next0();
-		}), function (_err0) {
-			if (_hasResult0) throw _err0;
-			_error(_err0);
-		});
-		_sync = false;
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    return new Promise((function (_resolve, _reject) {
+        var _sync = true;
+        function _error(_err) {
+            if (_sync)
+                _resolve(Promise.resolve().then((function () { throw _err; })));
+            else
+                _reject(_err);
+        };
+        function _next0() {
+            var _fn1 = _x[1];
+            var _hasResult1 = false;
+            var _promise1 = _fn1(value);
+            if (!_promise1 || !_promise1.then)
+                throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+            _promise1.then((function (_result1) {
+                _hasResult1 = true;
+                _resolve();
+            }), function (_err1) {
+                if (_hasResult1) throw _err1;
+                _error(_err1);
+            });
+        }
+        var _fn0 = _x[0];
+        var _hasResult0 = false;
+        var _promise0 = _fn0(value);
+        if (!_promise0 || !_promise0.then)
+            throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+        _promise0.then((function (_result0) {
+            _hasResult0 = true;
+            _next0();
+        }), function (_err0) {
+            if (_hasResult0) throw _err0;
+            _error(_err0);
+        });
+        _sync = false;
+    }));
 }
 ```
 
@@ -744,16 +742,16 @@ function anonymous(value) {
 ```js
 const asyncSeriesBailHook = new AsyncSeriesBailHook(['value']);
 asyncSeriesBailHook.tapAsync('AsyncSeriesBailHookPlugin', (value, callback) => {
-	console.log(value);
-	callback('我是第1个error')
+    console.log(value);
+    callback('我是第1个error')
 });
 asyncSeriesBailHook.tapAsync('AsyncSeriesBailHookPlugin', (value, callback) => {
-	console.log(value);
-	callback(null, '我是第二个')
+    console.log(value);
+    callback(null, '我是第二个')
 });
 asyncSeriesBailHook.callAsync(0, (error, result) => {
-	console.log('error', error);
-	console.log('result', result);
+    console.log('error', error);
+    console.log('result', result);
 })
 ```
 
@@ -767,37 +765,37 @@ asyncSeriesBailHook.callAsync(0, (error, result) => {
  * 如果callback没有传递参数，则继续执行下一个钩子
  */
 function anonymous(value, _callback) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	function _next0() {
-		var _fn1 = _x[1];
-		_fn1(value, (function (_err1, _result1) {
-			if (_err1) {
-				_callback(_err1);
-			} else {
-				if (_result1 !== undefined) {
-					_callback(null, _result1);
+    "use strict";
+    var _context;
+    var _x = this._x;
+    function _next0() {
+        var _fn1 = _x[1];
+        _fn1(value, (function (_err1, _result1) {
+            if (_err1) {
+                _callback(_err1);
+            } else {
+                if (_result1 !== undefined) {
+                    _callback(null, _result1);
 
-				} else {
-					_callback();
-				}
-			}
-		}));
-	}
-	var _fn0 = _x[0];
-	_fn0(value, (function (_err0, _result0) {
-		if (_err0) {
-			_callback(_err0);
-		} else {
-			if (_result0 !== undefined) {
-				_callback(null, _result0);
+                } else {
+                    _callback();
+                }
+            }
+        }));
+    }
+    var _fn0 = _x[0];
+    _fn0(value, (function (_err0, _result0) {
+        if (_err0) {
+            _callback(_err0);
+        } else {
+            if (_result0 !== undefined) {
+                _callback(null, _result0);
 
-			} else {
-				_next0();
-			}
-		}
-	}));
+            } else {
+                _next0();
+            }
+        }
+    }));
 
 }
 ```
@@ -807,7 +805,7 @@ function anonymous(value, _callback) {
 ```js
 const asyncSeriesBailHook = new AsyncSeriesBailHook(['value']);
 asyncSeriesBailHook.tapPromise('AsyncSeriesBailHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) > 5) {
                 console.log(`我是1号Tap`);
@@ -816,11 +814,11 @@ asyncSeriesBailHook.tapPromise('AsyncSeriesBailHookPlugin', (value) => {
                 j('小于5失败了')
             }
         }, 1000);
-		
+
     });
 });
 asyncSeriesBailHook.tapPromise('AsyncSeriesBailHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) <= 5) {
                 console.log(`我是2号Tap`);
@@ -832,10 +830,10 @@ asyncSeriesBailHook.tapPromise('AsyncSeriesBailHookPlugin', (value) => {
     });
 });
 asyncSeriesBailHook.promise(0).then(() => {
-	// 无参数
-	console.log('结束');
+    // 无参数
+    console.log('结束');
 }).catch((err) => {
-	console.log('错误', err);
+    console.log('错误', err);
 })
 ```
 
@@ -848,55 +846,55 @@ asyncSeriesBailHook.promise(0).then(() => {
  * promise.reject, 下一个钩子不会 执行，asyncSeriesBailHook.promise.catch接收报错
  */
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	return new Promise((function (_resolve, _reject) {
-		var _sync = true;
-		function _error(_err) {
-			if (_sync)
-				_resolve(Promise.resolve().then((function () { throw _err; })));
-			else
-				_reject(_err);
-		};
-		function _next0() {
-			var _fn1 = _x[1];
-			var _hasResult1 = false;
-			var _promise1 = _fn1(value);
-			if (!_promise1 || !_promise1.then)
-				throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-			_promise1.then((function (_result1) {
-				_hasResult1 = true;
-				if (_result1 !== undefined) {
-					_resolve(_result1);
+    "use strict";
+    var _context;
+    var _x = this._x;
+    return new Promise((function (_resolve, _reject) {
+        var _sync = true;
+        function _error(_err) {
+            if (_sync)
+                _resolve(Promise.resolve().then((function () { throw _err; })));
+            else
+                _reject(_err);
+        };
+        function _next0() {
+            var _fn1 = _x[1];
+            var _hasResult1 = false;
+            var _promise1 = _fn1(value);
+            if (!_promise1 || !_promise1.then)
+                throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+            _promise1.then((function (_result1) {
+                _hasResult1 = true;
+                if (_result1 !== undefined) {
+                    _resolve(_result1);
 
-				} else {
-					_resolve();
-				}
-			}), function (_err1) {
-				if (_hasResult1) throw _err1;
-				_error(_err1);
-			});
-		}
-		var _fn0 = _x[0];
-		var _hasResult0 = false;
-		var _promise0 = _fn0(value);
-		if (!_promise0 || !_promise0.then)
-			throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
-		_promise0.then((function (_result0) {
-			_hasResult0 = true;
-			if (_result0 !== undefined) {
-				_resolve(_result0);
+                } else {
+                    _resolve();
+                }
+            }), function (_err1) {
+                if (_hasResult1) throw _err1;
+                _error(_err1);
+            });
+        }
+        var _fn0 = _x[0];
+        var _hasResult0 = false;
+        var _promise0 = _fn0(value);
+        if (!_promise0 || !_promise0.then)
+            throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+        _promise0.then((function (_result0) {
+            _hasResult0 = true;
+            if (_result0 !== undefined) {
+                _resolve(_result0);
 
-			} else {
-				_next0();
-			}
-		}), function (_err0) {
-			if (_hasResult0) throw _err0;
-			_error(_err0);
-		});
-		_sync = false;
-	}));
+            } else {
+                _next0();
+            }
+        }), function (_err0) {
+            if (_hasResult0) throw _err0;
+            _error(_err0);
+        });
+        _sync = false;
+    }));
 }
 ```
 
@@ -907,16 +905,16 @@ function anonymous(value) {
 ```js
 const asyncSeriesLoopHook = new AsyncSeriesLoopHook(['value']);
 asyncSeriesLoopHook.tapAsync('AsyncSeriesLoopHookPlugin', (value, callback) => {
-	console.log(value);
-	callback('我是第1个error')
+    console.log(value);
+    callback('我是第1个error')
 });
 asyncSeriesLoopHook.tapAsync('AsyncSeriesLoopHookPlugin', (value, callback) => {
-	console.log(value);
-	callback(null, '我是第二个')
+    console.log(value);
+    callback(null, '我是第二个')
 });
 asyncSeriesLoopHook.callAsync(0, (error, result) => {
-	console.log('error', error);
-	console.log('result', result);
+    console.log('error', error);
+    console.log('result', result);
 })
 ```
 
@@ -930,48 +928,48 @@ asyncSeriesLoopHook.callAsync(0, (error, result) => {
  * 如果callback没有error=null, result=undefined，则继续执行下一个钩子
  */
 function anonymous(value, _callback) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	var _looper = (function () {
-		var _loopAsync = false;
-		var _loop;
-		do {
-			_loop = false;
-			function _next0() {
-				var _fn1 = _x[1];
-				_fn1(value, (function (_err1, _result1) {
-					if (_err1) {
-						_callback(_err1);
-					} else {
-						if (_result1 !== undefined) {
-							_loop = true;
-							if (_loopAsync) _looper();
-						} else {
-							if (!_loop) {
-								_callback();
-							}
-						}
-					}
-				}));
-			}
-			var _fn0 = _x[0];
-			_fn0(value, (function (_err0, _result0) {
-				if (_err0) {
-					_callback(_err0);
-				} else {
-					if (_result0 !== undefined) {
-						_loop = true;
-						if (_loopAsync) _looper();
-					} else {
-						_next0();
-					}
-				}
-			}));
-		} while (_loop);
-		_loopAsync = true;
-	});
-	_looper();
+    "use strict";
+    var _context;
+    var _x = this._x;
+    var _looper = (function () {
+        var _loopAsync = false;
+        var _loop;
+        do {
+            _loop = false;
+            function _next0() {
+                var _fn1 = _x[1];
+                _fn1(value, (function (_err1, _result1) {
+                    if (_err1) {
+                        _callback(_err1);
+                    } else {
+                        if (_result1 !== undefined) {
+                            _loop = true;
+                            if (_loopAsync) _looper();
+                        } else {
+                            if (!_loop) {
+                                _callback();
+                            }
+                        }
+                    }
+                }));
+            }
+            var _fn0 = _x[0];
+            _fn0(value, (function (_err0, _result0) {
+                if (_err0) {
+                    _callback(_err0);
+                } else {
+                    if (_result0 !== undefined) {
+                        _loop = true;
+                        if (_loopAsync) _looper();
+                    } else {
+                        _next0();
+                    }
+                }
+            }));
+        } while (_loop);
+        _loopAsync = true;
+    });
+    _looper();
 }
 ```
 
@@ -980,7 +978,7 @@ function anonymous(value, _callback) {
 ```js
 const asyncSeriesLoopHook = new AsyncSeriesLoopHook(['value']);
 asyncSeriesLoopHook.tapPromise('asyncSeriesLoopHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) > 5) {
                 console.log(`我是1号Tap`);
@@ -989,11 +987,11 @@ asyncSeriesLoopHook.tapPromise('asyncSeriesLoopHookPlugin', (value) => {
                 j('小于5失败了')
             }
         }, 1000);
-		
+
     });
 });
 asyncSeriesLoopHook.tapPromise('asyncSeriesLoopHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) <= 5) {
                 console.log(`我是2号Tap`);
@@ -1005,10 +1003,10 @@ asyncSeriesLoopHook.tapPromise('asyncSeriesLoopHookPlugin', (value) => {
     });
 });
 asyncSeriesLoopHook.promise(0).then(() => {
-	// 无参数
-	console.log('结束');
+    // 无参数
+    console.log('结束');
 }).catch((err) => {
-	console.log('错误', err);
+    console.log('错误', err);
 })
 ```
 
@@ -1021,66 +1019,66 @@ asyncSeriesLoopHook.promise(0).then(() => {
  * promise.reject, 下一个钩子不会执行，asyncSeriesLoopHook.promise.catch接收报错
  */
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	return new Promise((function (_resolve, _reject) {
-		var _sync = true;
-		function _error(_err) {
-			if (_sync)
-				_resolve(Promise.resolve().then((function () { throw _err; })));
-			else
-				_reject(_err);
-		};
-		var _looper = (function () {
-			var _loopAsync = false;
-			var _loop;
-			do {
-				_loop = false;
-				function _next0() {
-					var _fn1 = _x[1];
-					var _hasResult1 = false;
-					var _promise1 = _fn1(value);
-					if (!_promise1 || !_promise1.then)
-						throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-					_promise1.then((function (_result1) {
-						_hasResult1 = true;
-						if (_result1 !== undefined) {
-							_loop = true;
-							if (_loopAsync) _looper();
-						} else {
-							if (!_loop) {
-								_resolve();
-							}
-						}
-					}), function (_err1) {
-						if (_hasResult1) throw _err1;
-						_error(_err1);
-					});
-				}
-				var _fn0 = _x[0];
-				var _hasResult0 = false;
-				var _promise0 = _fn0(value);
-				if (!_promise0 || !_promise0.then)
-					throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
-				_promise0.then((function (_result0) {
-					_hasResult0 = true;
-					if (_result0 !== undefined) {
-						_loop = true;
-						if (_loopAsync) _looper();
-					} else {
-						_next0();
-					}
-				}), function (_err0) {
-					if (_hasResult0) throw _err0;
-					_error(_err0);
-				});
-			} while (_loop);
-			_loopAsync = true;
-		});
-		_looper();
-		_sync = false;
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    return new Promise((function (_resolve, _reject) {
+        var _sync = true;
+        function _error(_err) {
+            if (_sync)
+                _resolve(Promise.resolve().then((function () { throw _err; })));
+            else
+                _reject(_err);
+        };
+        var _looper = (function () {
+            var _loopAsync = false;
+            var _loop;
+            do {
+                _loop = false;
+                function _next0() {
+                    var _fn1 = _x[1];
+                    var _hasResult1 = false;
+                    var _promise1 = _fn1(value);
+                    if (!_promise1 || !_promise1.then)
+                        throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+                    _promise1.then((function (_result1) {
+                        _hasResult1 = true;
+                        if (_result1 !== undefined) {
+                            _loop = true;
+                            if (_loopAsync) _looper();
+                        } else {
+                            if (!_loop) {
+                                _resolve();
+                            }
+                        }
+                    }), function (_err1) {
+                        if (_hasResult1) throw _err1;
+                        _error(_err1);
+                    });
+                }
+                var _fn0 = _x[0];
+                var _hasResult0 = false;
+                var _promise0 = _fn0(value);
+                if (!_promise0 || !_promise0.then)
+                    throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+                _promise0.then((function (_result0) {
+                    _hasResult0 = true;
+                    if (_result0 !== undefined) {
+                        _loop = true;
+                        if (_loopAsync) _looper();
+                    } else {
+                        _next0();
+                    }
+                }), function (_err0) {
+                    if (_hasResult0) throw _err0;
+                    _error(_err0);
+                });
+            } while (_loop);
+            _loopAsync = true;
+        });
+        _looper();
+        _sync = false;
+    }));
 
 }
 ```
@@ -1092,16 +1090,16 @@ function anonymous(value) {
 ```js
 const asyncSeriesWaterfallHook = new AsyncSeriesWaterfallHook(['value']);
 asyncSeriesWaterfallHook.tapAsync('AsyncSeriesWaterfallHookPlugin', (value, callback) => {
-	console.log(value);
-	callback('我是第1个error')
+    console.log(value);
+    callback('我是第1个error')
 });
 asyncSeriesWaterfallHook.tapAsync('AsyncSeriesWaterfallHookPlugin', (value, callback) => {
-	console.log(value);
-	callback(null, '我是第二个')
+    console.log(value);
+    callback(null, '我是第二个')
 });
 asyncSeriesWaterfallHook.callAsync(0, (error, result) => {
-	console.log('error', error);
-	console.log('result', result);
+    console.log('error', error);
+    console.log('result', result);
 })
 ```
 
@@ -1116,33 +1114,33 @@ asyncSeriesWaterfallHook.callAsync(0, (error, result) => {
  * callback(null, undefined)，_callback接收最后的value
  */
 function anonymous(value, _callback) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	function _next0() {
-		var _fn1 = _x[1];
-		_fn1(value, (function (_err1, _result1) {
-			if (_err1) {
-				_callback(_err1);
-			} else {
-				if (_result1 !== undefined) {
-					value = _result1;
-				}
-				_callback(null, value);
-			}
-		}));
-	}
-	var _fn0 = _x[0];
-	_fn0(value, (function (_err0, _result0) {
-		if (_err0) {
-			_callback(_err0);
-		} else {
-			if (_result0 !== undefined) {
-				value = _result0;
-			}
-			_next0();
-		}
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    function _next0() {
+        var _fn1 = _x[1];
+        _fn1(value, (function (_err1, _result1) {
+            if (_err1) {
+                _callback(_err1);
+            } else {
+                if (_result1 !== undefined) {
+                    value = _result1;
+                }
+                _callback(null, value);
+            }
+        }));
+    }
+    var _fn0 = _x[0];
+    _fn0(value, (function (_err0, _result0) {
+        if (_err0) {
+            _callback(_err0);
+        } else {
+            if (_result0 !== undefined) {
+                value = _result0;
+            }
+            _next0();
+        }
+    }));
 }
 ```
 
@@ -1151,7 +1149,7 @@ function anonymous(value, _callback) {
 ```js
 const asyncSeriesWaterfallHook = new AsyncSeriesWaterfallHook(['value']);
 asyncSeriesWaterfallHook.tapPromise('AsyncSeriesWaterfallHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) > 5) {
                 console.log(`我是1号Tap`);
@@ -1160,11 +1158,11 @@ asyncSeriesWaterfallHook.tapPromise('AsyncSeriesWaterfallHookPlugin', (value) =>
                 j('小于5失败了')
             }
         }, 1000);
-		
+
     });
 });
 asyncSeriesWaterfallHook.tapPromise('AsyncSeriesWaterfallHookPlugin', (value) => {
-	return new Promise((r, j) => {
+    return new Promise((r, j) => {
         setTimeout(() => {
             if (~~(Math.random() * 10) <= 5) {
                 console.log(`我是2号Tap`);
@@ -1176,10 +1174,10 @@ asyncSeriesWaterfallHook.tapPromise('AsyncSeriesWaterfallHookPlugin', (value) =>
     });
 });
 asyncSeriesWaterfallHook.promise(0).then(() => {
-	// 无参数
-	console.log('结束');
+    // 无参数
+    console.log('结束');
 }).catch((err) => {
-	console.log('错误', err);
+    console.log('错误', err);
 })
 ```
 
@@ -1193,50 +1191,50 @@ asyncSeriesWaterfallHook.promise(0).then(() => {
  * promise.reject, 下一个钩子不会执行，asyncSeriesWaterfallHook.promise.catch接收报错
  */
 function anonymous(value) {
-	"use strict";
-	var _context;
-	var _x = this._x;
-	return new Promise((function (_resolve, _reject) {
-		var _sync = true;
-		function _error(_err) {
-			if (_sync)
-				_resolve(Promise.resolve().then((function () { throw _err; })));
-			else
-				_reject(_err);
-		};
-		function _next0() {
-			var _fn1 = _x[1];
-			var _hasResult1 = false;
-			var _promise1 = _fn1(value);
-			if (!_promise1 || !_promise1.then)
-				throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
-			_promise1.then((function (_result1) {
-				_hasResult1 = true;
-				if (_result1 !== undefined) {
-					value = _result1;
-				}
-				_resolve(value);
-			}), function (_err1) {
-				if (_hasResult1) throw _err1;
-				_error(_err1);
-			});
-		}
-		var _fn0 = _x[0];
-		var _hasResult0 = false;
-		var _promise0 = _fn0(value);
-		if (!_promise0 || !_promise0.then)
-			throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
-		_promise0.then((function (_result0) {
-			_hasResult0 = true;
-			if (_result0 !== undefined) {
-				value = _result0;
-			}
-			_next0();
-		}), function (_err0) {
-			if (_hasResult0) throw _err0;
-			_error(_err0);
-		});
-		_sync = false;
-	}));
+    "use strict";
+    var _context;
+    var _x = this._x;
+    return new Promise((function (_resolve, _reject) {
+        var _sync = true;
+        function _error(_err) {
+            if (_sync)
+                _resolve(Promise.resolve().then((function () { throw _err; })));
+            else
+                _reject(_err);
+        };
+        function _next0() {
+            var _fn1 = _x[1];
+            var _hasResult1 = false;
+            var _promise1 = _fn1(value);
+            if (!_promise1 || !_promise1.then)
+                throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise1 + ')');
+            _promise1.then((function (_result1) {
+                _hasResult1 = true;
+                if (_result1 !== undefined) {
+                    value = _result1;
+                }
+                _resolve(value);
+            }), function (_err1) {
+                if (_hasResult1) throw _err1;
+                _error(_err1);
+            });
+        }
+        var _fn0 = _x[0];
+        var _hasResult0 = false;
+        var _promise0 = _fn0(value);
+        if (!_promise0 || !_promise0.then)
+            throw new Error('Tap function (tapPromise) did not return promise (returned ' + _promise0 + ')');
+        _promise0.then((function (_result0) {
+            _hasResult0 = true;
+            if (_result0 !== undefined) {
+                value = _result0;
+            }
+            _next0();
+        }), function (_err0) {
+            if (_hasResult0) throw _err0;
+            _error(_err0);
+        });
+        _sync = false;
+    }));
 }
 ```
